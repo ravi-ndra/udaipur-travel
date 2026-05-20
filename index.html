@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Udaipur Travel Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --deep: #1a0f2e;
+    --lake: #2a5f8f;
+    --sunset: #e8724a;
+    --cream: #f5f0e8;
+    --text: #2d1f0e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(160deg, #1a0f2e 0%, #2a3a6e 45%, #c96b3a 100%);
+    color: white;
+    text-align: center;
+    padding: 70px 24px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-tag {
+    display: inline-block;
+    border: 1px solid rgba(201,168,76,0.5);
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    margin-bottom: 24px;
+    border-radius: 2px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 14vw, 100px);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    margin-bottom: 16px;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-sub {
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 32px;
+  }
+  .hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  .pill {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 48px 20px;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .section + .section { padding-top: 0; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--gold);
+    opacity: 0.3;
+    line-height: 1;
+    min-width: 48px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .section-title small {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sunset);
+    margin-bottom: 4px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 20px;
+    opacity: 0.3;
+  }
+
+  /* CARDS */
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    border-left: 3px solid transparent;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(0,0,0,0.1); }
+  .card.gold { border-left-color: var(--gold); }
+  .card.lake { border-left-color: var(--lake); }
+  .card.sunset { border-left-color: var(--sunset); }
+  .card.deep { border-left-color: var(--deep); }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .icon { font-size: 20px; }
+
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-left: auto;
+  }
+  .badge.must { background: #fef3cd; color: #8a6000; }
+  .badge.tip { background: #d4edda; color: #155724; }
+  .badge.warn { background: #f8d7da; color: #721c24; }
+
+  ul.tips {
+    list-style: none;
+    padding: 0;
+  }
+  ul.tips li {
+    padding: 5px 0 5px 18px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #444;
+  }
+  ul.tips li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 12px;
+    top: 6px;
+  }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px dashed #eee;
+    font-size: 13px;
+  }
+  .price-row:last-child { border-bottom: none; }
+  .price-row .label { color: #666; }
+  .price-row .val { font-weight: 500; color: var(--deep); }
+
+  /* DAY TIMELINE */
+  .day-block {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+  }
+  .day-header {
+    padding: 16px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .day-header.d1 { background: linear-gradient(135deg, #1a0f2e, #2a3a6e); color: white; }
+  .day-header.d2 { background: linear-gradient(135deg, #c96b3a, #e8724a); color: white; }
+  .day-header.d3 { background: linear-gradient(135deg, #2a5f8f, #1a3a6e); color: white; }
+  .day-header.d4 { background: linear-gradient(135deg, #2d6a4f, #1b4332); color: white; }
+
+  .day-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 900;
+    opacity: 0.5;
+    line-height: 1;
+  }
+  .day-info { flex: 1; }
+  .day-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .day-info p { font-size: 12px; opacity: 0.8; letter-spacing: 0.5px; }
+
+  .day-body { padding: 20px 22px; }
+
+  .time-item {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .time-label {
+    min-width: 70px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding-top: 2px;
+  }
+  .time-content { flex: 1; }
+  .time-content h4 { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .time-content p { font-size: 13px; color: #666; line-height: 1.5; }
+
+  /* FOOD GRID */
+  .food-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 400px) { .food-grid { grid-template-columns: 1fr; } }
+
+  .food-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .food-card .emoji { font-size: 24px; margin-bottom: 8px; }
+  .food-card h4 { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .food-card p { font-size: 12px; color: #777; line-height: 1.4; }
+
+  /* STAY CARDS */
+  .stay-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+  }
+  .stay-top {
+    padding: 18px 20px 12px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .stay-type {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sunset);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .stay-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .stay-body { padding: 14px 20px; }
+
+  /* BUDGET TABLE */
+  .budget-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .budget-table tr { border-bottom: 1px solid #f0f0f0; }
+  .budget-table td { padding: 10px 4px; }
+  .budget-table td:last-child { text-align: right; font-weight: 500; }
+  .budget-table tfoot td { font-weight: 700; font-size: 15px; border-top: 2px solid var(--gold); border-bottom: none; }
+
+  /* BASICS GRID */
+  .basics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 400px) { .basics-grid { grid-template-columns: 1fr; } }
+  .basic-item {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    text-align: center;
+  }
+  .basic-item .emoji { font-size: 28px; margin-bottom: 8px; }
+  .basic-item h4 { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+  .basic-item p { font-size: 12px; color: #777; line-height: 1.4; }
+
+  /* FOOTER */
+  footer {
+    background: var(--deep);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  footer h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  footer p { font-size: 13px; opacity: 0.6; }
+
+  .highlight-box {
+    background: linear-gradient(135deg, #1a0f2e, #2a3a6e);
+    color: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .highlight-box strong { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">The Complete Local Guide</div>
+  <h1>U<span>dai</span>pur</h1>
+  <p class="hero-sub">The City of Lakes · Rajasthan, India</p>
+  <div class="hero-pills">
+    <span class="pill">🌅 Sunsets</span>
+    <span class="pill">🚤 Boat Rides</span>
+    <span class="pill">🏯 Palaces</span>
+    <span class="pill">🍽️ Food</span>
+    <span class="pill">🛵 Scooty</span>
+    <span class="pill">130+ Days of Experience</span>
+  </div>
+</div>
+
+<!-- ITINERARY -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div class="section-title">
+      <small>Day by Day</small>
+      Sample Itinerary
+    </div>
+  </div>
+
+  <!-- Day 1 -->
+  <div class="day-block">
+    <div class="day-header d1">
+      <div class="day-num">1</div>
+      <div class="day-info">
+        <h3>Arrival Day</h3>
+        <p>Settle in · First sunset · Lake vibes</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="time-item">
+        <div class="time-label">Afternoon</div>
+        <div class="time-content">
+          <h4>Check in to your hotel</h4>
+          <p>Stay inside Old City — near Lal Ghat, Gangaur Ghat, or Ambrai Ghat. Everything is walkable from here.</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time-label">Evening</div>
+        <div class="time-content">
+          <h4>🚡 Karni Mata Ropeway — Sunset</h4>
+          <p>The best sunset spot in Udaipur. Go just before sunset but stay after dark — that's when the colors really show. Full city view from the top. It's quiet. Unreal.</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time-label">Night</div>
+        <div class="time-content">
+          <h4>🚤 Pichola Lake Boat Ride</h4>
+          <p>Take two rides — one at golden hour, one after dark to see city lights from the lake. ₹185/ride.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 2 -->
+  <div class="day-block">
+    <div class="day-header d2">
+      <div class="day-num">2</div>
+      <div class="day-info">
+        <h3>City & Lake Day</h3>
+        <p>Palaces · Hills · Boat · Sunset</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="time-item">
+        <div class="time-label">5:00 AM</div>
+        <div class="time-content">
+          <h4>🌄 Bahubali Hills — Sunrise</h4>
+          <p>30 min from city by scooty. Easy 10-min trek to the top. Wide, calm, unreal views. Leave by 5 AM to catch 6 AM sunrise.</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time-label">Morning</div>
+        <div class="time-content">
+          <h4>🏰 Sajjangarh Fort (Monsoon Palace)</h4>
+          <p>Breathtaking Aravalli views. Entry ₹110. Best shots from the terrace.</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time-label">Afternoon</div>
+        <div class="time-content">
+          <h4>🏛️ City Palace + Ambrai Ghat</h4>
+          <p>Ask for "Garden Ticket" at City Palace — ₹50 only (skip the ₹400 ticket). At Ambrai Ghat, sit facing the palace, put your feet in the water. Closes 8 PM.</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time-label">Evening</div>
+        <div class="time-content">
+          <h4>🏯 Jag Mandir Boat Ride</h4>
+          <p>After 3 PM: ₹700 (best for sunset view from middle of lake). Last boat at 5:15 PM from City Palace. Don't eat there — food is overpriced. Just enjoy the walk.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 3 -->
+  <div class="day-block">
+    <div class="day-header d3">
+      <div class="day-num">3</div>
+      <div class="day-info">
+        <h3>Ranakpur & Kumbhalgarh</h3>
+        <p>Day trip · Temples · Fort walls</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="time-item">
+        <div class="time-label">Early AM</div>
+        <div class="time-content">
+          <h4>Start early — it's a full day</h4>
+          <p>Ranakpur is ~95 km from Udaipur, then another 50 km to Kumbhalgarh. Best done by scooty or rental car.</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time-label">Afternoon</div>
+        <div class="time-content">
+          <h4>🕌 Ranakpur Jain Temple</h4>
+          <p>1,444 carved marble pillars — opens for tourists in the afternoon. Free entry for Indians. Light filtering through carvings is stunning.</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time-label">Evening</div>
+        <div class="time-content">
+          <h4>🏰 Kumbhalgarh Fort — The Great Wall of India</h4>
+          <p>Entry ₹40. Panoramic views and a majestic feel. Stay to see the fort light up at dusk.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 4 -->
+  <div class="day-block">
+    <div class="day-header d4">
+      <div class="day-num">4</div>
+      <div class="day-info">
+        <h3>Old City & Farewell</h3>
+        <p>Walk · Temple · Brunch · Goodbye</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="time-item">
+        <div class="time-label">Morning</div>
+        <div class="time-content">
+          <h4>🛕 Jagdish Temple</h4>
+          <p>Intricately carved temple near City Palace. A beautiful architectural marvel — free to visit.</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time-label">Late AM</div>
+        <div class="time-content">
+          <h4>🏯 City Palace Museum</h4>
+          <p>Takes 2–3 hours. A proper look into Mewar royal history. Don't rush it.</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time-label">Noon</div>
+        <div class="time-content">
+          <h4>🍽️ Brunch with a lake view</h4>
+          <p>Find a café overlooking Lake Pichola. Jheel's Ginger Cafe for Nutella pancakes or veg exotic pizza.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SUNSET SPOTS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div class="section-title">
+      <small>Best Spots</small>
+      Sunsets & Sunrises
+    </div>
+  </div>
+
+  <div class="card sunset">
+    <div class="card-title"><span class="icon">🌅</span> Karni Mata Ropeway <span class="badge must">Best of all</span></div>
+    <ul class="tips">
+      <li>Go just before sunset — stay after dark, that's when colors really pop</li>
+      <li>On top of a hill — full 360° city view</li>
+      <li>For sunrise: walk up via temple steps (not ropeway), follow track to city wall</li>
+      <li>Left side: Lake Pichola · Right side: Sunrise over Aravallis</li>
+    </ul>
+  </div>
+
+  <div class="card lake">
+    <div class="card-title"><span class="icon">🌊</span> Ambrai Ghat</div>
+    <ul class="tips">
+      <li>Peaceful. Sit facing the City Palace</li>
+      <li>Put your feet in the water</li>
+      <li>Stay till dark — the City Palace lights up beautifully</li>
+      <li>Closes by 8 PM</li>
+    </ul>
+  </div>
+
+  <div class="card gold">
+    <div class="card-title"><span class="icon">🏯</span> City Palace Garden</div>
+    <ul class="tips">
+      <li>Ask for "Garden Ticket" — ₹50 only (not ₹400)</li>
+      <li>After sunset, walls glow gold and sky turns deep blue</li>
+      <li>Perfect golden-hour photo spot</li>
+    </ul>
+  </div>
+
+  <div class="card gold">
+    <div class="card-title"><span class="icon">⛰️</span> Bahubali Hills — Sunrise</div>
+    <ul class="tips">
+      <li>Leave city by 5:00 AM for 6:00 AM sunrise</li>
+      <li>30 min from city by scooty</li>
+      <li>Easy 10-min trek to top</li>
+      <li>Wide, calm, unreal views</li>
+      <li>Scooty rental: ₹350–₹370</li>
+    </ul>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- FOOD -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div class="section-title">
+      <small>Where to Eat</small>
+      Must-Try Food
+    </div>
+  </div>
+
+  <div class="food-grid">
+    <div class="food-card">
+      <div class="emoji">🍛</div>
+      <h4>Natraj Restaurant</h4>
+      <p>Rajasthani Thali — 100% must. Authentic local flavors.</p>
+    </div>
+    <div class="food-card">
+      <div class="emoji">🍖</div>
+      <h4>Harigarh — Lal Mass</h4>
+      <p>Just wow. A Rajasthani red meat curry like nowhere else.</p>
+    </div>
+    <div class="food-card">
+      <div class="emoji">🌾</div>
+      <h4>Millets of Mewar</h4>
+      <p>One of a kind in India. Don't miss this.</p>
+    </div>
+    <div class="food-card">
+      <div class="emoji">☕</div>
+      <h4>Jheel's Ginger Cafe</h4>
+      <p>Nutella pancake & veg exotic pizza. Amazing lake views.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- BOAT RIDES -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div class="section-title">
+      <small>On the Water</small>
+      Boat Rides
+    </div>
+  </div>
+
+  <div class="card lake">
+    <div class="card-title"><span class="icon">🚤</span> Pichola Lake — Municipal Point</div>
+    <div class="price-row"><span class="label">Per ride</span><span class="val">₹185</span></div>
+    <div class="price-row"><span class="label">Best: 2 rides total</span><span class="val">₹370</span></div>
+    <br>
+    <ul class="tips">
+      <li>If sunset is at 6:30 PM → take boat at 5:30–5:45 PM</li>
+      <li>First ride at golden hour, second after dark</li>
+      <li>See city lights reflecting on the lake at night — magical</li>
+    </ul>
+  </div>
+
+  <div class="card gold">
+    <div class="card-title"><span class="icon">🏛️</span> Jag Mandir Boat Ride</div>
+    <div class="price-row"><span class="label">Before 3 PM</span><span class="val">₹350</span></div>
+    <div class="price-row"><span class="label">After 3 PM (best for sunset)</span><span class="val">₹700</span></div>
+    <br>
+    <ul class="tips">
+      <li>Last boat at 5:15 PM from City Palace</li>
+      <li>Sunset view from the middle of the lake is incredible</li>
+      <li>Skip eating there — food is overpriced and underwhelming</li>
+    </ul>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ROMANTIC CAFES -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <div class="section-title">
+      <small>Romantic Spots</small>
+      Lakeside Restaurants
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    💡 <strong>For all three restaurants below:</strong> book in advance — weekends fill up fast. Weekdays are much easier to get a table.
+  </div>
+
+  <div class="card sunset">
+    <div class="card-title"><span class="icon">🕯️</span> Ambrai Restaurant <span class="badge must">Must Pre-book</span></div>
+    <ul class="tips">
+      <li>No online bookings — call directly</li>
+      <li>Side lake seats: ₹2,000/person cover</li>
+      <li>Middle seats are free and almost the same view — smart choice</li>
+    </ul>
+  </div>
+
+  <div class="card gold">
+    <div class="card-title"><span class="icon">📸</span> Jagat Niwas Palace Restaurant</div>
+    <ul class="tips">
+      <li>Most Instagrammable spot — entire walls are white</li>
+      <li>Wear dark colors — looks best in photos</li>
+      <li>Sunset is the best time for pics</li>
+      <li>Skip food — just order Coke or coffee and chill</li>
+    </ul>
+  </div>
+
+  <div class="card lake">
+    <div class="card-title"><span class="icon">🌊</span> Upre Restaurant</div>
+    <ul class="tips">
+      <li>Right beside Ambrai, same stunning lake view</li>
+      <li>Almost always booked — pre-book it</li>
+    </ul>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- WHERE TO STAY -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">06</div>
+    <div class="section-title">
+      <small>Accommodation</small>
+      Where to Stay
+    </div>
+  </div>
+
+  <div class="stay-card">
+    <div class="stay-top">
+      <div class="stay-type">For Families · Couples · Romantic Stays</div>
+      <div class="stay-name">Rang Haveli</div>
+    </div>
+    <div class="stay-body">
+      <ul class="tips">
+        <li>New & dreamy aesthetic rooms — each one unique</li>
+        <li>Attached to City Palace — location is unbeatable</li>
+        <li>Perfect for families, friends, or couples</li>
+        <li>Book via Instagram: @ranghaveli or DM @kasoor_e_methi</li>
+        <li>Phone: Ankit +91 93722 81895 · Gaurav +91 85911 77568</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="stay-card">
+    <div class="stay-top">
+      <div class="stay-type">For Solo Travellers · Friends · Budget</div>
+      <div class="stay-name">3 Raahi Hostel</div>
+    </div>
+    <div class="stay-body">
+      <ul class="tips">
+        <li>Right beside Jagdish Temple — 1 min walk to City Palace</li>
+        <li>Super clean & comfy · Very safe for women</li>
+        <li>Amazing hosts — Pushpak is legendary</li>
+        <li>Budget: starts ₹700–₹1,000/night</li>
+        <li>Phone: Vaishali 8827661913 · Pushpak 8825169866</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="highlight-box" style="margin-top:0">
+    📍 <strong>Best location tip:</strong> Stay in Old City near City Palace. Areas — Lal Ghat, Gangaur Ghat, Ambrai Ghat. Everything major is walkable from here.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- BUDGET -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">07</div>
+    <div class="section-title">
+      <small>Money Matters</small>
+      Budget Breakdown
+    </div>
+  </div>
+
+  <div class="card gold">
+    <table class="budget-table">
+      <tbody>
+        <tr><td>🏨 Accommodation (3 nights)</td><td>₹2,100 – ₹3,000</td></tr>
+        <tr><td>🍽️ Food (4 days)</td><td>₹2,400 – ₹3,200</td></tr>
+        <tr><td>🚤 Boat rides (Pichola × 2)</td><td>₹370</td></tr>
+        <tr><td>🏯 Jag Mandir boat</td><td>₹700</td></tr>
+        <tr><td>🏰 Sajjangarh Fort entry</td><td>₹110</td></tr>
+        <tr><td>🏰 Kumbhalgarh Fort entry</td><td>₹40</td></tr>
+        <tr><td>🕌 Ranakpur Temple</td><td>Free (Indians)</td></tr>
+        <tr><td>🎟️ Other entries + ropeway</td><td>₹1,000 – ₹1,500</td></tr>
+        <tr><td>🛵 Scooty rental (per day)</td><td>₹350 – ₹450</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td>Estimated Total</td><td>₹7,000 – ₹9,000</td></tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- BASICS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">08</div>
+    <div class="section-title">
+      <small>Practical Tips</small>
+      The Basics
+    </div>
+  </div>
+
+  <div class="basics-grid">
+    <div class="basic-item">
+      <div class="emoji">✈️</div>
+      <h4>Airport → City</h4>
+      <p>No Ubers at airport. Book a rental car. Cost: ₹350–₹600. Cars can't enter old city lanes.</p>
+    </div>
+    <div class="basic-item">
+      <div class="emoji">🛵</div>
+      <h4>Getting Around</h4>
+      <p>Scooty rental is the move. ₹350–₹450/day. Rental shops everywhere in Old City.</p>
+    </div>
+    <div class="basic-item">
+      <div class="emoji">🏨</div>
+      <h4>Where to Stay</h4>
+      <p>Old City only. Near City Palace. Lal Ghat, Gangaur Ghat, Ambrai Ghat area.</p>
+    </div>
+    <div class="basic-item">
+      <div class="emoji">💧</div>
+      <h4>Essentials</h4>
+      <p>Carry water. Take breaks every 1–2 hrs if riding. Keep all docs handy.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <h2>Have a magical trip 🌅</h2>
+  <p style="margin-top:8px; margin-bottom:16px">Based on 130+ days of real experience in Udaipur</p>
+  <p style="font-size:12px; opacity:0.4">Guide by @ashokinreallife · Compiled with ♥</p>
+</footer>
+
+</body>
+</html>
